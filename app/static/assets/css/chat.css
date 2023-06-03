@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1, h2 {
+    color: #333;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  input, button {
+    margin-top: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #login-message, #register-message {
+    margin-top: 10px;
+    color: red;
+  }
+  
+  #conversation {
+    margin-top: 50px;
+  }
+  
+  #messages {
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: scroll;
+  }
+  
+  #input {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  #send-button {
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,15 @@
+EMAIL_USE_TLS = True
+EMAIL_HOST = '<your_smtp_host>'
+EMAIL_HOST_USER = '<your_email>'
+EMAIL_HOST_PASSWORD = '<your_password_email>'
+EMAIL_PORT = '<your_email_port>'
+DATABASE = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '<your_database_name>',
+        'USER': '<your_username>',
+        'PASSWORD': '<your_password>',
+        'HOST': '<your_host>',
+        'PORT': '3306',
+    }
+}

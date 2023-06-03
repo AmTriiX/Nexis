@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "Chat" %} -{% endblock title %}
+{% block content %}
+{% block class %}bg-white{% endblock class %}
+        <header class="inner-page-header">
+            <div class="container">
+                <div class="inner-header-content">
+                    <h1>{% trans "Chat" %}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{% trans "Chat" %}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <center><div id="chat-log"></div></center>
+        <section class="terms-section p-tb-100">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <input type="text" id="user-input" class="form-control" placeholder="Type your message..." /> <br />
+                    <button id="send-button" class="btn main-btn">Send</button>
+                </div>
+            </div>
+        </section>
+
+
+{% endblock content %}
+{% block javascript %}<script>
+            const chatLog = document.getElementById('chat-log');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+            
+            sendButton.addEventListener('click', () => {
+                const userMessage = userInput.value.trim();
+                if (userMessage !== '') {
+                    sendMessage(userMessage);
+                    userInput.value = '';
+                }
+            });
+            
+            function sendMessage(message) {
+                const url = 'http://127.0.0.1:5000/chat';
+                const apiKey = '{{ api_key }}';
+            
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': apiKey
+                    },
+                    body: JSON.stringify({ input: message })
+                };
+            
+                fetch(url, requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        const aiResponse = data.risultato;
+                        displayMessage('user', `User:\n${message}`);
+                        if (apiKey === '') {
+                            displayMessage('ai', ` AI:\nInvalid API Key`);
+                        } else {
+                            displayMessage('ai', ` AI:\n${aiResponse}`);
+                        }
+                    })
+                    .catch(error => console.error(error));
+            }
+            
+            function displayMessage(role, content) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.classList.add(role);
+                messageElement.textContent = content;
+                chatLog.appendChild(messageElement);
+            }
+</script>{% endblock javascript %}

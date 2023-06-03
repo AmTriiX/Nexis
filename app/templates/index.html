@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block content %}
+
+         <header class="header header-bg-lg header-bg-shape border-bottom-1">
+            <div class="container-fluid p-lg-0">
+                <div class="row m-lg-0">
+                    <div class="col-lg-6 p-lg-0">
+                        <div class="max-585 ms-auto">
+                            <div class="header-content">
+                                <h1>{% trans "Best Machine Learning Product Creator" %}</h1> 
+                                <p>{% trans "Welcome to the website of the Best Machine Learning Product Creator. We are dedicated to creating top-of-the-line machine learning products." %}</p>
+                                <div class="button-group button-group-animated">
+                                    <a href="{% url 'contact' %}" class="btn main-btn">{% trans "Get Started" %}</a>
+                                    <a href="{% url 'contact' %}" class="btn main-btn main-btn-white">{% trans "Start A Free Trial" %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-image-shape">
+                <img src="{% static 'assets/images/homepage/header-shape.png' %}" alt="shape">
+            </div>
+            <div class="header-animation-shapes animation-d-none">
+                <div class="header-animation-shape"></div>
+            </div>
+        </header>
+
+        <section class="feature-section pt-min-100 pb-70">
+            <div class="container">
+                <div class="section-title section-title-lg">
+                    {% blocktrans %}
+                    <h2>Any Sufficiently Advanced <br> Technology Is Indistinguishable From Magic</h2>
+                    {% endblocktrans %}
+                </div>
+                <div class="container">
+                    <div class="row">{% for feat in feature %}
+                        <div class="col-md-6 col-lg-3 pb-30">
+                            <div class="feature-card">
+                                <div class="feature-card-header">
+                                    <div class="feature-card-thumb feature-card-thumb-green">
+                                        <i class="{{ feat.flaticon }}"></i>
+                                    </div>
+                                    <span>{% trans feat.name %}</span>
+                                </div>
+                                <div class="feature-card-body"> 
+                                    <p>{{ feat.desc }}</p>
+                                    <a href="{% url 'feature_detail' slug=feat.slug %}" class="redirect-link">{% trans "Discover More" %} <i class="icofont-rounded-right"></i></a>
+                                </div>
+                            </div>
+                        </div>{% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section bg-off-white pt-100 pb-70">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 pb-30">
+                        <div class="about-section-item about-item-image text-center">
+                            <img src="{{ aboutus.0.picture.url }}" alt="shape">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pb-30">
+                        <div class="about-section-item about-item-details">
+                            <div class="section-title section-title-left text-start">
+                                <small>{{ aboutus.0.category }}</small>
+                                <h2>{{ aboutus.0.title }}</h2>
+                            </div>
+                            <div class="about-content">
+                                <p>{{ aboutus.0.body|convert_markdown|safe }}</p>
+                                <a href="{% url 'about' %}" class="btn main-btn">{% trans "About Us" %}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section pt-100 pb-70">
+            <div class="container">
+                <div class="section-title section-title-lg">
+                    <small>{% trans "Services" %}</small>
+                    {% blocktrans %}
+                    <h2>Our Purpose Is To Deliver Excellence <br> In Service And Execution</h2>
+                    <p>Our purpose is to deliver excellence in service and execution Our purpose is to deliver excellence in service and Our purpose is to deliver excellence in service.</p>
+                    {% endblocktrans %}
+                </div>
+                <div class="row">{% for serv in service %}
+                    <div class="col-md-6 col-lg-4 pb-30">
+                        <div class="service-card">
+                            <div class="service-card-thumb">
+                                <i class="{{ serv.flaticon }}"></i>
+                            </div>
+                            <div class="service-card-body">
+                                <h3>{% trans serv.name %}</h3>
+                                <p>{% trans serv.desc %}</p>
+                                <a href="{% url 'serviceDetail' slug=serv.slug %}" class="redirect-link">{% trans "Discover More" %} <i class="icofont-rounded-right"></i></a>
+                            </div>
+                        </div>
+                    </div>{% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="trial-section pt-min-100 pb-100 bg-main page-bg page-bg-1">
+            <div class="container">
+                <div class="section-title section-title-lg section-title-white mb-0">
+                    <h2>{% trans "We Are Offering 14 Days Free Trial" %}</h2>
+                    <p>{% trans "Experience our product firsthand with our 14-day free trial offer, and discover how our innovative solutions can drive growth and success for your business." %}</p>
+                    <a href="{% url 'contact' %}" class="btn main-btn main-btn-white main-btn-rounded-icon">{% trans "Try 14 Days Free Trial" %} <span><i class="icofont-rounded-right"></i></span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-section pt-100 pb-70 bg-off-white">
+            <div class="container">
+                <div class="section-title section-title-lg">
+                    <small>{% trans "Our Process" %}</small>
+                    <h2>{% trans "Process How Machine Learning Will Help Your Business" %}</h2>
+                </div>
+                <div class="process-content">
+                    <div class="process-content-line"></div>
+                    <div class="row justify-content-center">
+                        {% for proc in process %}
+                        <div class="col-sm-6 col-lg-4 pb-30">
+                            <div class="process-item process-item-center border">
+                                <div class="process-thumb">
+                                    <img src="{{ proc.image.url }}" alt="shape">
+                                </div>
+                                <div class="process-text">
+                                    <h3>{% trans proc.name %}</h3>
+                                    <p>{% trans proc.desc %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% comment %}
+        <section class="news-section pt-100 pb-70 bg-off-white">
+            <div class="container">
+                <div class="section-title section-title-lg">
+                    <small>News & Blog</small>
+                    <h2>Company News & Updates Read All <br> Related Blog</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 pb-30">
+                        <div class="blog-card">
+                            <div class="blog-card-image">
+                                <a href="single-blog.html">
+                                    <img src="assets/images/blogs/blog-1.jpg" alt="blog">
+                                </a>
+                            </div>
+                            <div class="blog-card-text">
+                                <div class="blog-category">Technology</div>
+                                <h3><a href="single-blog.html">Is Machine Learning Right Going On Good Way</a></h3>
+                                <div class="blog-card-entry">
+                                    <div class="blog-entry-thumb">
+                                        <img src="assets/images/blogs/blog-author-1.jpg" alt="author">
+                                    </div>
+                                    <div class="blog-entry-text">
+                                        <h4>By: <strong>David Joe</strong></h4>
+                                        <p>5 January 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 pb-30">
+                        <div class="blog-card">
+                            <div class="blog-card-image">
+                                <a href="single-blog.html">
+                                    <img src="assets/images/blogs/blog-2.jpg" alt="blog">
+                                </a>
+                            </div>
+                            <div class="blog-card-text">
+                                <div class="blog-category">Robot</div>
+                                <h3><a href="single-blog.html">The Current State Of Artificial Intelligence Infographic</a></h3>
+                                <div class="blog-card-entry">
+                                    <div class="blog-entry-thumb">
+                                        <img src="assets/images/blogs/blog-author-2.jpg" alt="author">
+                                    </div>
+                                    <div class="blog-entry-text">
+                                        <h4>By: <strong>Lona Rabisa</strong></h4>
+                                        <p>4 January 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 offset-md-3 offset-lg-0 pb-30">
+                        <div class="blog-card">
+                            <div class="blog-card-image">
+                                <a href="single-blog.html">
+                                    <img src="assets/images/blogs/blog-3.jpg" alt="blog">
+                                </a>
+                            </div>
+                            <div class="blog-card-text">
+                                <div class="blog-category">Machine</div>
+                                <h3><a href="single-blog.html">Our Company As A Global Leader In Big Data</a></h3>
+                                <div class="blog-card-entry">
+                                    <div class="blog-entry-thumb">
+                                        <img src="assets/images/blogs/blog-author-3.jpg" alt="author">
+                                    </div>
+                                    <div class="blog-entry-text">
+                                        <h4>By: <strong>Richard Jac</strong></h4>
+                                        <p>3 January 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endcomment %}
+
+{% endblock content %}

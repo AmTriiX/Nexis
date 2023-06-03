@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "About Us" %} -{% endblock title %}
+{% block content %}
+{% block class %}bg-white{% endblock class %}
+
+<header class="inner-page-header">
+    <div class="container">
+        <div class="inner-header-content">
+            <h1>{% trans "About Us" %}</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{% trans "About Us" %}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<section class="about-section bg-off-white pt-100 pb-70">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 pb-30">
+                <div class="about-section-item about-item-image text-center">
+                    <img src="{{ aboutus.0.picture.url }}" alt="shape">
+                </div>
+            </div>
+            <div class="col-lg-6 pb-30">
+                <div class="about-section-item about-item-details">
+                    <div class="section-title section-title-left text-start">
+                        <small>{{ aboutus.0.category }}</small>
+                        <h2>{{ aboutus.0.title }}</h2>
+                    </div>
+                    <div class="about-content">
+                        <p>{{ aboutus.0.body|convert_markdown|safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if whyus %}
+<section class="choose-section pb-70 pt-100">
+    <div class="container">
+        <div class="section-title">
+            <small>{% trans "Why Choose Us" %}</small>
+            <h2>{% trans "Why People Choose Skailar For ML Services" %}</h2>
+            <p>{% trans "Skailar is a trusted partner for ML services, offering customized solutions to meet specific business needs with their team of skilled engineers and data scientists." %}</p>
+        </div>
+        <div class="process-content">
+            <div class="row justify-content-center">
+                {% for why in whyus %}
+                <div class="col-md-6 col-lg-4 pb-30">
+                    <div class="process-item process-item-center border">
+                        <div class="process-thumb">
+                            <img src="{{ why.image.url }}" alt="shape">
+                        </div>
+                        <div class="process-text">
+                            <h3>{{ why.name }}</h3>
+                            <p>{% trans why.desc %}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock content %}
